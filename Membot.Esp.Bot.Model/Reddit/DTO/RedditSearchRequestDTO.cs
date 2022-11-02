@@ -1,4 +1,5 @@
-﻿using Membot.Esp.Bot.Model.Reddit.Models;
+﻿using Membot.Esp.Bot.Common.Enums;
+using Membot.Esp.Bot.Model.Reddit.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,14 @@ namespace Membot.Esp.Bot.Model.Reddit.DTO
         [JsonProperty("limit")]
         public int Limit { get; set; } = 25;
         [JsonProperty("q")]
-        public string q { get; set; }
+        public string Q { get; set; }
         [JsonProperty("restrict_sr")]
-
+        public bool Restrict_Sr { get; set; }
+        [JsonProperty("show")]
+        public string Show { get; set; }
+        [JsonProperty("sort")]
+        public RedditSortEnum Sort { get; set; }
+        [JsonProperty("t")]
+        public RedditTimeEnum Time { get; set; }
     }
 }
