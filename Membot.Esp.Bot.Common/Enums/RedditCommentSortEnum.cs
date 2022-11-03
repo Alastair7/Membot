@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Membot.Esp.Bot.Common.Enums
 {
-    public enum RedditSortEnum
+    public enum RedditCommentSortEnum
     {
-        Relevance,
-        Hot,
+        Confidence,
         Top,
         New,
-        Comments
+        Controversial,
+        Old,
+        Random,
+        Qa,
+        Live
     }
 }
