@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Membot.Esp.Bot.Model.Reddit.DTO
 {
-    public class RedditSearchRequestDTO
+    public class RedditSearchPostRequestDTO
     {
         [JsonProperty("after")]
         public RedditThingModel After { get; set; }
@@ -28,7 +28,7 @@ namespace Membot.Esp.Bot.Model.Reddit.DTO
         [JsonProperty("show")]
         public string Show { get; set; }
         [JsonProperty("sort")]
-        public RedditSortEnum Sort { get; set; }
+        public RedditPostSortEnum Sort { get; set; }
         [JsonProperty("t")]
         public RedditTimeEnum Time { get; set; }
     }
