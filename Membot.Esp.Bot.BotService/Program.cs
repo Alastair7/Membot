@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Hosting;
 using Membot.Esp.Bot.BotService;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 
 using IHost host = CreateHostBuilder(args).Build();
 using var scope = host.Services.CreateScope();
@@ -16,7 +18,10 @@ var services = scope.ServiceProvider;
 
 try 
 {
-    services.GetRequiredService<Bot>().Run(args);
+    DotNetEnv.Env.TraversePath().Load();
+    IOptions<BotAuthConfigurationModel> botOptions = services.GetRequiredService<IOptions<BotAuthConfigurationModel>>();
+
+    services.GetRequiredService<Bot>().Run(args, botOptions);
 }
 catch (Exception ex)
 {
@@ -27,6 +32,18 @@ static IHostBuilder CreateHostBuilder(string[] args)
 {
     return Host.CreateDefaultBuilder(args).ConfigureServices((_, services) =>
     {
+        _.Configuration = CreateConfigurationBuilder().Build();
         // Add Services Here
+        services.Configure<BotAuthConfigurationModel>(_.Configuration.GetSection("BotConfig"));
+
+        services.AddSingleton<Bot>();
+        services.AddTransient<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
     });
+}
+
+static ConfigurationBuilder CreateConfigurationBuilder()
+{
+   return (ConfigurationBuilder)new ConfigurationBuilder()
+         .SetBasePath(Directory.GetCurrentDirectory())
+         .AddJsonFile($"appsettings.json");
 }

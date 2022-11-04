@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Membot.Esp.Bot.Model.Bot.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +18,9 @@ namespace Membot.Esp.Bot.BotService
             this.logger = logger;
         }
 
-        public void Run(string[] args)
+        public void Run(string[] args, IOptions<BotAuthConfigurationModel> botConfig)
         {
+            Console.WriteLine(Environment.GetEnvironmentVariable(botConfig.Value.Token));
             // Run BOT (Use Timer or something like that)
             // Get ENV Variables
             // Get APIs Data
