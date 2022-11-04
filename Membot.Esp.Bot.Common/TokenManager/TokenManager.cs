@@ -5,26 +5,20 @@ namespace Membot.Esp.Bot.Common.TokenManager
 {
     public class TokenManager : ITokenManager
     {
-        private readonly BotAuthConfigurationModel botConfiguration;
-
-        public TokenManager(IOptions<BotAuthConfigurationModel> botConfiguration)
-        {
-            this.botConfiguration = botConfiguration.Value;
-        }
 
         public string GetBotKey()
         {
-            return botConfiguration.Key;
+            return Environment.GetEnvironmentVariable("Key");
         }
 
         public string GetBotKeySecret()
         {
-            return botConfiguration.KeySecret;
+            return Environment.GetEnvironmentVariable("KeySecret");
         }
 
         public string GetBotToken()
         {
-            return botConfiguration.Token;
+            return Environment.GetEnvironmentVariable("Token");
         }
     }
 }

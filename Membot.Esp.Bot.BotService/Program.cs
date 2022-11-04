@@ -5,33 +5,21 @@ using Membot.Esp.Bot.Logic.Test;
 using Membot.Esp.Bot.Model.Bot.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.CompilerServices;
 
-namespace Membot.Esp.Bot.BotService
-{
-    public class Program
+
+    static void ConfigureServices(IServiceCollection services)
     {
-        public static IConfigurationRoot Configuration { get; set; }
-
-        private static void Main(string[] args)
+        services.AddLogging(builder =>
         {
-            Console.WriteLine("Hello, World !");
+            builder.AddConsole();
+            builder.AddDebug();
+        });
 
-            var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
-            var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) || devEnvironmentVariable.ToLower() == "development";
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Path.GetDirectoryName(AppContext.BaseDirectory))
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
-            if (isDevelopment)
-            {
-                builder.AddUserSecrets<BotAuthConfigurationModel>();
-            }
-            Configuration = builder.Build();
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false)
+            .AddEnvironmentVariables().Build();
 
-            var services = new ServiceCollection().Configure<BotAuthConfigurationModel>(Configuration.GetSection(nameof(BotAuthConfigurationModel)))
-                .AddOptions().BuildServiceProvider();
-
-            services.GetService<ITokenManager>();
-        }
+        services.Configure<IConfiguration>(configuration);
     }
-}
