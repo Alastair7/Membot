@@ -6,20 +6,27 @@ using Membot.Esp.Bot.Model.Bot.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Hosting;
+using Membot.Esp.Bot.BotService;
 
+using IHost host = CreateHostBuilder(args).Build();
+using var scope = host.Services.CreateScope();
 
-    static void ConfigureServices(IServiceCollection services)
+var services = scope.ServiceProvider;
+
+try 
+{
+    services.GetRequiredService<Bot>().Run(args);
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+
+static IHostBuilder CreateHostBuilder(string[] args)
+{
+    return Host.CreateDefaultBuilder(args).ConfigureServices((_, services) =>
     {
-        services.AddLogging(builder =>
-        {
-            builder.AddConsole();
-            builder.AddDebug();
-        });
-
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false)
-            .AddEnvironmentVariables().Build();
-
-        services.Configure<IConfiguration>(configuration);
-    }
+        // Add Services Here
+    });
+}

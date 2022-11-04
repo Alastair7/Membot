@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,20 @@ namespace Membot.Esp.Bot.BotService
 {
     public class Bot
     {
-        // Run BOT (Use Timer or something like that)
+        private readonly ILogger logger;
 
-        // Get ENV Variables
-        // Get APIs Data
-        // Send API
+        public Bot (ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        public void Run(string[] args)
+        {
+            // Run BOT (Use Timer or something like that)
+            // Get ENV Variables
+            // Get APIs Data
+            // Send API
+        }
 
     }
 }
