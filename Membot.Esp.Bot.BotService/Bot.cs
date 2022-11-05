@@ -3,12 +3,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Membot.Esp.Bot.BotService
 {
-    public class Bot
+    public class Bot : IBot
     {
-        private readonly ILogger logger;
+        private readonly ILogger<Bot> logger;
         private readonly ITokenManager tokenManager;
 
-        public Bot (ILogger logger, ITokenManager tokenManager)
+        public Bot (ILogger<Bot> logger, ITokenManager tokenManager)
         {
             this.logger = logger;
             this.tokenManager = tokenManager;
@@ -16,9 +16,7 @@ namespace Membot.Esp.Bot.BotService
 
         public void Run()
         {
-            logger.Log(LogLevel.Information, "Test");
-            Console.WriteLine(tokenManager.GetBotToken());
-
+            logger.LogInformation("Test Token: {token}", tokenManager.GetBotToken());
             // Run BOT (Use Timer or something like that)
             // Get ENV Variables
             // Get APIs Data
