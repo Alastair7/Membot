@@ -16,6 +16,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Membot.Esp.Bot.Logic", "Membot.Esp.Bot.Logic\Membot.Esp.Bot.Logic.csproj", "{56801903-CE9F-43D8-8DAC-7EC4D5A6F0A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Membot.Esp.Bot.Model", "Membot.Esp.Bot.Model\Membot.Esp.Bot.Model.csproj", "{E37758EA-E6BF-4B92-BBD9-58845E6809F7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8978894D-B8C7-4036-8D4C-25B82326D302} = {8978894D-B8C7-4036-8D4C-25B82326D302}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Membot.Esp.Bot.BotService", "Membot.Esp.Bot.BotService\Membot.Esp.Bot.BotService.csproj", "{49B66F02-630B-42EE-A3CA-75277BE61FEA}"
 EndProject

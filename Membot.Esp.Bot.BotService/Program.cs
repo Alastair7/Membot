@@ -1,7 +1,6 @@
 ﻿
 // See https://aka.ms/new-console-template for more information
 using Membot.Esp.Bot.Common.TokenManager;
-using Membot.Esp.Bot.Model.Bot.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,7 +17,7 @@ try
 {
     // LOAD ENV VARIABLES
     DotNetEnv.Env.TraversePath().Load();
-    IOptions<BotAuthConfigurationModel> botOptions = services.GetRequiredService<IOptions<BotAuthConfigurationModel>>();
+    IOptions<BotAuthConfig> botOptions = services.GetRequiredService<IOptions<BotAuthConfig>>();
 
     // RUN BOT
     services.GetRequiredService<Bot>().Run();
@@ -34,7 +33,7 @@ static IHostBuilder CreateHostBuilder(string[] args)
     return Host.CreateDefaultBuilder(args).ConfigureServices((_, services) =>
     {
         _.Configuration = CreateConfigurationBuilder().Build();
-        services.Configure<BotAuthConfigurationModel>(_.Configuration.GetSection("BotConfig"));
+        services.Configure<BotAuthConfig>(_.Configuration.GetSection("BotConfig"));
 
         // Add Services Here
         services.AddSingleton<Bot>();

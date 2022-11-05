@@ -1,13 +1,12 @@
-﻿using Membot.Esp.Bot.Model.Bot.Models;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
 namespace Membot.Esp.Bot.Common.TokenManager
 {
     public class TokenManager : ITokenManager
     {
-        private readonly IOptions<BotAuthConfigurationModel> botConfig;
+        private readonly IOptions<BotAuthConfig> botConfig;
 
-        public TokenManager(IOptions<BotAuthConfigurationModel> botConfig)
+        public TokenManager(IOptions<BotAuthConfig> botConfig)
         {
             this.botConfig = botConfig;
         }

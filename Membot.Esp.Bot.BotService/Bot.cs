@@ -1,12 +1,5 @@
 ﻿using Membot.Esp.Bot.Common.TokenManager;
-using Membot.Esp.Bot.Model.Bot.Models;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Membot.Esp.Bot.BotService
 {
