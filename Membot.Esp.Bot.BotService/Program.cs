@@ -46,5 +46,5 @@ static ConfigurationBuilder CreateConfigurationBuilder()
 {
    return (ConfigurationBuilder)new ConfigurationBuilder()
          .SetBasePath(Directory.GetCurrentDirectory())
-         .AddJsonFile($"appsettings.json").AddJsonFile("autofac.json");
+         .AddJsonFile($"appsettings.json");
 }
