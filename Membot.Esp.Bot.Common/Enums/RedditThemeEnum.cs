@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Membot.Esp.Bot.Model.Reddit.DTO
+namespace Membot.Esp.Bot.Common.Enums
 {
-    internal class ExampleRequestDto
+    public enum RedditThemeEnum
     {
+        Default,
+        Dark
     }
 }
