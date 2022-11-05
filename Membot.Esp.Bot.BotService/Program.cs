@@ -18,25 +18,29 @@ var services = scope.ServiceProvider;
 
 try 
 {
+    // LOAD ENV VARIABLES
     DotNetEnv.Env.TraversePath().Load();
     IOptions<BotAuthConfigurationModel> botOptions = services.GetRequiredService<IOptions<BotAuthConfigurationModel>>();
 
-    services.GetRequiredService<Bot>().Run(args, botOptions);
+    // RUN BOT
+    services.GetRequiredService<Bot>().Run();
 }
 catch (Exception ex)
 {
     Console.WriteLine(ex.Message);
 }
 
+// CONFIGURE SERVICES
 static IHostBuilder CreateHostBuilder(string[] args)
 {
     return Host.CreateDefaultBuilder(args).ConfigureServices((_, services) =>
     {
         _.Configuration = CreateConfigurationBuilder().Build();
-        // Add Services Here
         services.Configure<BotAuthConfigurationModel>(_.Configuration.GetSection("BotConfig"));
 
+        // Add Services Here
         services.AddSingleton<Bot>();
+        services.AddScoped<ITokenManager, TokenManager>();
         services.AddTransient<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
     });
 }
@@ -45,5 +49,5 @@ static ConfigurationBuilder CreateConfigurationBuilder()
 {
    return (ConfigurationBuilder)new ConfigurationBuilder()
          .SetBasePath(Directory.GetCurrentDirectory())
-         .AddJsonFile($"appsettings.json");
+         .AddJsonFile($"appsettings.json").AddJsonFile("autofac.json");
 }

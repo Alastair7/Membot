@@ -1,4 +1,5 @@
-﻿using Membot.Esp.Bot.Model.Bot.Models;
+﻿using Membot.Esp.Bot.Common.TokenManager;
+using Membot.Esp.Bot.Model.Bot.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -12,15 +13,19 @@ namespace Membot.Esp.Bot.BotService
     public class Bot
     {
         private readonly ILogger logger;
+        private readonly ITokenManager tokenManager;
 
-        public Bot (ILogger logger)
+        public Bot (ILogger logger, ITokenManager tokenManager)
         {
             this.logger = logger;
+            this.tokenManager = tokenManager;
         }
 
-        public void Run(string[] args, IOptions<BotAuthConfigurationModel> botConfig)
+        public void Run()
         {
-            Console.WriteLine(Environment.GetEnvironmentVariable(botConfig.Value.Token));
+            logger.Log(LogLevel.Information, "Test");
+            Console.WriteLine(tokenManager.GetBotToken());
+
             // Run BOT (Use Timer or something like that)
             // Get ENV Variables
             // Get APIs Data

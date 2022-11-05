@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Membot.Esp.Bot.Common\Membot.Esp.Bot.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Test\" />
+  </ItemGroup>
+
 </Project>
